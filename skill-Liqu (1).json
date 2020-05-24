@@ -1,0 +1,275 @@
+{
+  "intents": [
+    {
+      "intent": "choice",
+      "examples": [
+        {
+          "text": "yes"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "bear",
+      "examples": [
+        {
+          "text": "Bear"
+        },
+        {
+          "text": "I want Bear"
+        },
+        {
+          "text": "want bear"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "jd1",
+      "examples": [
+        {
+          "text": "jack daniel"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Want",
+      "examples": [
+        {
+          "text": "want liquor"
+        },
+        {
+          "text": "I want liquor"
+        },
+        {
+          "text": "order liquor"
+        },
+        {
+          "text": "liquor"
+        },
+        {
+          "text": "I want to order liquor"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "King",
+      "examples": [
+        {
+          "text": "King fisher"
+        },
+        {
+          "text": "want king fisher"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "choicebear",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Bear",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Whisky",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "choicew",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Kingfisher",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "foaster",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "choicey",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Yes",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "No",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "choicewh",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Johnnie Walker",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Jack Daniel",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "I want Liquor",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "What type of liquor you want to have? (Bear/Whiskey)"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "conditions": "#Want",
+      "dialog_node": "node_1_1590212891559"
+    },
+    {
+      "type": "standard",
+      "title": "Bear",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "What Brand of bear? (Kingfisher/foaster)"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1590212891559",
+      "conditions": "#bear",
+      "dialog_node": "node_9_1590213037222"
+    },
+    {
+      "type": "standard",
+      "title": "king",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Ok Will Serve"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1590213037222",
+      "conditions": "@choicew:Kingfisher",
+      "dialog_node": "node_5_1590213446070"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "Welcome",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Liqu",
+  "language": "en",
+  "description": "Liq"
+}
